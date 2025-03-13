@@ -1,5 +1,5 @@
 helm-extra-args: --timeout 600s
 debug: true
 target-branch: main
-lint-conf: .github/lintconf.yaml
+# lint-conf: .github/lintconf.yaml
 validate-maintainers: false
