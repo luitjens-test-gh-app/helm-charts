@@ -3,6 +3,16 @@ entries:
   test-app:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-03-14T14:36:44.807473339Z"
+    description: A Helm chart for Kubernetes
+    digest: e74bb10fa0c93afca08864b04d3a5a9926b327375ce83cdd851c95f66ea2ef69
+    name: test-app
+    type: application
+    urls:
+    - https://github.com/luitjens-test-gh-app/helm-charts/releases/download/test-app-0.1.2/test-app-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-03-13T22:28:07.387295377Z"
     description: A Helm chart for Kubernetes
     digest: 7d3a9964a45f2d91f5630f9a80ac18264ecf1c0d2415962d1a2d5a2f5e79d9d8
@@ -11,4 +21,4 @@ entries:
     urls:
     - https://github.com/luitjens-test-gh-app/helm-charts/releases/download/test-app-0.1.1/test-app-0.1.1.tgz
     version: 0.1.1
-generated: "2025-03-13T22:28:07.387300617Z"
+generated: "2025-03-14T14:36:44.807481725Z"
