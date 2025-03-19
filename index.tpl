@@ -118,7 +118,7 @@
 
       <pre class="snippet" lang="no-highlight" style="padding: 0">
         <button class="btn" onclick="copyToClipboard(this)">
-          <img class="clippy" src="/docs/assets/images/clippy.svg" alt="Copy to clipboard" width="13">
+          <img class="clippy" src="assets/images/clippy.svg" alt="Copy to clipboard" width="13">
         </button>
   <code id="helm-command">helm repo add luitjens-test-gh-app https://luitjens-test-gh-app.github.io/helm-charts</code>
       </pre>
@@ -142,7 +142,7 @@
       <p>Run the command above to add the repo to the helm cli client. This will contain all the charts listed under the <a href="#chart-1">Charts section</a> below. This can be validated by running the helm search command below:</p>
       <pre class="snippet" lang="no-highlight" style="padding: 0">
         <button class="btn" onclick="copyToClipboard(this)">
-          <img class="clippy" src="/docs/assets/images/clippy.svg" alt="Copy to clipboard" width="13">
+          <img class="clippy" src="assets/images/clippy.svg" alt="Copy to clipboard" width="13">
         </button>
   <code id="helm-search-command">helm search repo luitjens-test-gh-app --versions</code>
       </pre>
@@ -162,14 +162,14 @@
           <div class="chart">
             <a href="{{ (index (index $chartEntry 0).Urls 0) }}" title="{{ (index (index $chartEntry 0).Urls 0) }}">
               <div class="icon">
-                <img class="chart-item-logo" alt="{{ $key }}'s logo" src="/docs/assets/images/{{ (index $chartEntry 0).Name }}.png" onerror="this.onerror=null; this.src='/docs/assets/images/placeholder.png';">
+                <img class="chart-item-logo" alt="{{ $key }}'s logo" src="assets/images/{{ (index $chartEntry 0).Name }}.png" onerror="this.onerror=null; this.src='assets/images/placeholder.png';">
               </div>
               <div class="body">
                 <p class="info">
                   {{ (index $chartEntry 0).Name }}
                   ({{ (index $chartEntry 0).Version }}@{{ (index $chartEntry 0).AppVersion }})
                   <a href="https://github.com/luitjens-test-gh-app/helm-charts/releases/tag/{{ $key }}-{{ (index $chartEntry 0).Version }}">
-                    <img src="/docs/assets/images/GitHub-Mark-32px.png" alt="github link" style="height: 16px; width: 16px; vertical-align: middle;" />
+                    <img src="assets/images/GitHub-Mark-32px.png" alt="github link" style="height: 16px; width: 16px; vertical-align: middle;" />
                   </a>
                 </p>
                 <p class="description">
