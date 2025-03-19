@@ -139,7 +139,7 @@
         }
       </script>
 
-      <p>Run the command above to add the repo to the helm cli client. This will contain all the charts listed under the <a href="#chart-1">Charts section</a> below. This can be validated by running the helm search command below:</p>
+      <p>Run the ahahhaahah command above to add the repo to the helm cli client. This will contain all the charts listed under the <a href="#chart-1">Charts section</a> below. This can be validated by running the helm search command below:</p>
       <pre class="snippet" lang="no-highlight" style="padding: 0">
         <button class="btn" onclick="copyToClipboard(this)">
           <img class="clippy" src="docs/assets/images/clippy.svg" alt="Copy to clipboard" width="13">
