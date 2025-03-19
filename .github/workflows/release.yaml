@@ -70,7 +70,7 @@ jobs:
       - name: Upload index.html file as artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./index.html
+          path: .
 
       - name: Deploy to GitHub Pages
         id: deployment
