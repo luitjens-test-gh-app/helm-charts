@@ -69,12 +69,37 @@ jobs:
         with:
           ref: gh-pages
 
+      - name: Download index.yaml from teraslice repo
+        run: |
+          gh api repos/terascope/teraslice/helm/helm-repo-site/index.yaml --jq '.download_url' > url.txt
+          curl -Ss -L $(cat url.txt) -o teraslice-index.yaml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge teraslice's index.yaml
+        run: |
+          # merge index.yaml files
+          yq eval-all '. | select(fileIndex == 0) *+ select(fileIndex == 1)' index.yaml teraslice-index.yaml > merged-index.yaml
+
+          # remove duplicates and sort by version in descending order          
+          yq -i \
+            '.entries.teraslice-chart |= unique_by(.version) | \
+            .entries.teraslice-chart |= sort_by(.version) | \
+            .entries.teraslice-chart |= reverse' \
+            merged-index.yaml
+
+          # replace old index.yaml with merged
+          mv merged-index.yaml index.yaml
+
+          # remove teraslice-index.yaml so it doesn't get merged
+          rm teraslice-index.yaml
+
       - name: Run repo-html to build chart index.html
         run: |
           helm plugin install https://github.com/halkeye/helm-repo-html
           helm repo-html
 
-      - name: Upload index.html file as artifact
+      - name: Upload all files as artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
