@@ -71,8 +71,8 @@ jobs:
 
       - name: Download index.yaml from teraslice repo
         run: |
-          gh api repos/terascope/teraslice/helm/helm-repo-site/index.yaml --jq '.download_url' > url.txt
-          curl -Ss -L $(cat url.txt) -o teraslice-index.yaml
+          gh api  -H "Accept: application/vnd.github.v3.raw" \
+          repos/terascope/teraslice/contents/helm/helm-repo-site/index.yaml > teraslice-index.yaml
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
