@@ -82,11 +82,11 @@ jobs:
           yq eval-all '. | select(fileIndex == 0) *+ select(fileIndex == 1)' index.yaml teraslice-index.yaml > merged-index.yaml
 
           # remove duplicates and sort by version in descending order          
-          yq -i \
-            '.entries.teraslice-chart |= unique_by(.version) | \
-            .entries.teraslice-chart |= sort_by(.version) | \
-            .entries.teraslice-chart |= reverse' \
-            merged-index.yaml
+          yq -i '
+            .entries.teraslice-chart |= unique_by(.version) |
+            .entries.teraslice-chart |= sort_by(.version) |
+            .entries.teraslice-chart |= reverse
+          ' merged-index.yaml
 
           # replace old index.yaml with merged
           mv merged-index.yaml index.yaml
