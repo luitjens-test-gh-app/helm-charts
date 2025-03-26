@@ -2,7 +2,10 @@ name: Publish
 
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+    types:
+      - closed
 
 jobs:
   build-and-publish-helm-charts:
