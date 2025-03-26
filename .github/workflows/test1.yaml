@@ -67,3 +67,4 @@ jobs:
         run: |
           echo "triggered4"
           RETRIEVED=${{ needs.build-and-publish-helm-charts.outputs.helm_chart_updated }}
+          echo $RETRIEVED
