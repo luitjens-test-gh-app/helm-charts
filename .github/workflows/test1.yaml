@@ -15,7 +15,7 @@ jobs:
       contents: write
       packages: write
     outputs:
-       helm_chart_updated: ${{ !steps.check-version.outputs.version_exists }}
+       version_exists: ${{ steps.check-version.outputs.version_exists }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -32,7 +32,7 @@ jobs:
           echo "exists: $exists"
 
   trigger-workflow:
-    if: github.event.pull_request.merged == true && needs.build-and-publish-helm-charts.outputs.helm_chart_updated == 'true'
+    if: github.event.pull_request.merged == true && needs.build-and-publish-helm-charts.outputs.version_exists == 'false'
     needs: [build-and-publish-helm-charts]
     runs-on: ubuntu-latest
     steps:
@@ -41,7 +41,7 @@ jobs:
         run: echo "triggered1"
 
   trigger-workflow2:
-    if: github.event.pull_request.merged == true && needs.build-and-publish-helm-charts.outputs.helm_chart_updated == true
+    if: github.event.pull_request.merged == true && needs.build-and-publish-helm-charts.outputs.version_exists == false
     needs: [build-and-publish-helm-charts]
     runs-on: ubuntu-latest
     steps:
@@ -50,7 +50,7 @@ jobs:
         run: echo "triggered2"
 
   trigger-workflow3:
-    if: needs.build-and-publish-helm-charts.outputs.helm_chart_updated == 'true'
+    if: needs.build-and-publish-helm-charts.outputs.version_exists == 'false'
     needs: [build-and-publish-helm-charts]
     runs-on: ubuntu-latest
     steps:
@@ -66,5 +66,5 @@ jobs:
         name: triggered4
         run: |
           echo "triggered4"
-          RETRIEVED=${{ needs.build-and-publish-helm-charts.outputs.helm_chart_updated }}
+          RETRIEVED=${{ needs.build-and-publish-helm-charts.outputs.version_exists }}
           echo $RETRIEVED
