@@ -182,6 +182,6 @@
 			{{end}}
       </div>
     </section>
-		<time datetime="{{ .Generated.Format "2006-01-02T15:04:05" }}" pubdate id="generated">{{ .Generated.Format "Mon Jan 2 2006 03:04:05PM MST-07:00" }}</time>
+		<time datetime="BUILD_TIME" pubdate id="generated">BUILD_TIME</time>
   </body>
 </html>
