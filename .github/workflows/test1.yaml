@@ -1,0 +1,66 @@
+name: Publish
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-publish-helm-charts:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    outputs:
+       helm_chart_updated: ${{ !steps.check-version.outputs.version_exists }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Check if Helm Chart Version Exists in GHCR
+        id: check-version
+        run: |
+          echo "version_exists=false" >> $GITHUB_OUTPUT
+
+      - name: confirm version_exists
+        env:
+          exists: ${{ steps.check-version.outputs.version_exists }}
+        run: |
+          echo "exists: $exists"
+
+  trigger-workflow:
+    if: github.event.pull_request.merged == true && needs.build-and-publish-helm-charts.outputs.helm_chart_updated == 'true'
+    needs: [build-and-publish-helm-charts]
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: triggered1
+        run: echo "triggered1"
+
+  trigger-workflow2:
+    if: github.event.pull_request.merged == true && needs.build-and-publish-helm-charts.outputs.helm_chart_updated == true
+    needs: [build-and-publish-helm-charts]
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: triggered2
+        run: echo "triggered2"
+
+  trigger-workflow3:
+    if: needs.build-and-publish-helm-charts.outputs.helm_chart_updated == 'true'
+    needs: [build-and-publish-helm-charts]
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: triggered3
+        run: echo "triggered3"
+
+  trigger-workflow4:
+    needs: [build-and-publish-helm-charts]
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: triggered4
+        run: |
+          echo "triggered4"
+          RETRIEVED=${{ needs.build-and-publish-helm-charts.outputs.helm_chart_updated }}
